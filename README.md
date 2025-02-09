@@ -16,6 +16,16 @@ cd ../../
 pip install -e .
 ```
 
+## Dataset
+
+Download the dataset used in the paper using:
+
+```
+huggingface-cli download daman1209arora/compression_dataset --repo-type dataset --local-dir datasets/compression_dataset
+```
+
+This dataset is a random split created using easily parsed problems from the MATH, cn k12, AIME, AoPS and Olympiad subsets Numina Math dataset.
+
 ## Design
 Our codebase is adapted using the [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF) library.
 For minimal changes to the codebase, we launch a remote reward server defined in `reward_server/math_server.py`
