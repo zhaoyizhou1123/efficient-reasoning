@@ -4,10 +4,9 @@
 #SBATCH --nodes=2
 #SBATCH --gpus-per-node=4
 #SBATCH --cpus-per-task=16
-#SBATCH --partition=ghx4
-#SBATCH --account=bcuv-dtai-gh   # <- match to a "Project" returned by the "accounts" command
 #SBATCH --job-name=run
-#SBATCH --time=04:00:00      # hh:mm:ss for the job
+#SBATCH --partition=ghx4
+#SBATCH --time=24:00:00      # hh:mm:ss for the job
 #SBATCH -e logs/slurm-%j.err
 #SBATCH -o logs/slurm-%j.out
 
