@@ -92,7 +92,7 @@
 
                 <!-- Github link -->
                 <span class="link-block">
-                    <a href="https://github.com/Zanette-Labs/SpeculativeRejection" target="_blank"
+                    <a href="https://github.com/Zanette-Labs/efficient-reasoning" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                         <i class="fab fa-github"></i>
@@ -117,7 +117,10 @@
         <h2 class="title is-3" style="text-align: center;"><img src="static/images/Align.png" style="height: 43px; display: inline; vertical-align:text-top;"/>&nbsp; Introduction</h2>
         <div class="content has-text-justified">
           <p>
-            The safe and effective deployment of LLMs involves a critical step called alignment, which ensures that the model's responses are in accordance with human preferences. Techniques like <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/a85b405ed65c6477a4fe8302b5e06ce7-Abstract-Conference.html" style="color: #209CEE;">DPO</a>, <a href="https://arxiv.org/abs/1707.06347" style="color: #209CEE;">PPO</a> and their variants, align LLMs by changing the pre-trained model weights during a phase called post-training. While predominant, these post-training methods <b>add substantial complexity</b> before LLMs can be deployed. Inference-time alignment methods avoid the complex post-training step and instead bias the generation towards responses that are aligned with human preferences. The best-known inference-time alignment method, called <a href="https://proceedings.neurips.cc/paper/2020/hash/1f89885d556929e98d3ef9b86448f951-Abstract.html" style="color: #209CEE;">Best-of-N</a>, is as effective as the state-of-the-art post-training procedures. Unfortunately, Best-of-N <b>requires vastly more resources at inference time</b> than standard decoding strategies, which makes it computationally not viable. We introduce <b>Speculative Rejection, a computationally-viable inference-time alignment algorithm</b>. It generates high-scoring responses according to a given reward model, like Best-of-N does, while being <b>between 16 to 32 times more computationally efficient</b>.
+            Scaling model size and training data has led to great advances in the performance of Large Language Models (LLMs). However, the diminishing returns of this approach necessitate alternative methods to improve model capabilities, particularly in tasks requiring advanced reasoning. Large reasoning models, which leverage long chain-of-thoughts, bring unprecedented breakthroughs in  problem-solving capabilities but at a substantial deployment cost associated to longer generations. Reducing inference costs is crucial for the economic feasibility, user experience, and environmental sustainability of these models.
+
+In this work, we propose to train large reasoning models to reason efficiently.
+More precisely, we use reinforcement learning (RL) to train reasoning models to dynamically allocate inference-time compute based on task complexity. Our method incentivizes models to minimize unnecessary computational overhead while maintaining accuracy, thereby achieving substantial efficiency gains. It  enables the derivation of a family of reasoning models with varying efficiency levels, controlled via a single hyperparameter. Experiments on two open-weight large reasoning models demonstrate significant reductions in inference cost while preserving most of the accuracy.
           </p>
           <div class="figure">
             <img src="static/images/perf_rm.png" alt="Retrieval-based Drafting" height="400" />
