@@ -41,8 +41,8 @@ To evaluate a model, use the script provided in the main directory:
 
 ```
 python evaluate_model.py \
-    --model_path='scale:1.5B_alpha:0.1/'\
-    --dataset=openai/gsm8k\
+    --model_path='scale:1.5B_alpha:0.1/' \
+    --dataset=openai/gsm8k \
     --scale=1.5B
 ```
 
