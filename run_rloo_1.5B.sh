@@ -88,7 +88,7 @@ python -m openrlhf.cli.train_ppo_ray \
   --train_batch_size 128 \
   --micro_rollout_batch_size 1 \
   --rollout_batch_size 32 \
-  --max_samples 320 \
+  --max_samples 3200 \
   --prompt_max_len 512 \
   --generate_max_len $GENERATE_MAX_LEN \
   --zero_stage 2 \
