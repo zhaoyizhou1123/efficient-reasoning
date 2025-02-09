@@ -1,5 +1,5 @@
 '''
-This file is the server for the GSM reward server. It listens for incoming connections from the GSM reward client and sends the reward to the OpenRLHF environment.
+This file is the server for the reward function. It listens for incoming connections from the client and sends the reward to the OpenRLHF environment.
 '''
 
 import json
@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 
 def load_dataset_dicts(datasets):
+    # Load datasets into memory
     dataset_dict = {}
     print(f"Loading {datasets}...")
     for dataset_name in datasets:
@@ -33,6 +34,7 @@ def sigmoid(x):
 
 @app.route('/query', methods=['POST'])
 def query():
+    # Main entry point for the server
     try:
         metrics = {'rewards': []}
         for dataset_name in app.config['dataset_names']:
@@ -114,7 +116,7 @@ def query():
         return jsonify(metrics), 200
     
     except Exception as e:
-        # Save the dict for debug purposes.
+        # Save the dict for debugging purposes.
         print("Query:", json.dump(query_dict, open('error.json', 'w'), indent=4))
         print(str(e))
         return jsonify({"error": str(e)}), 500
