@@ -1,7 +1,7 @@
 # Training Large Language Models to Reason Efficiently
 
 This is the codebase for our paper ["Training Large Language Models to Reason Efficiently"]().
-The codebase has been tested on H200 GPUs with Python 3.10.15 and CUDA 12.6. 
+The codebase has been tested on GH200 GPUs with Python 3.10.15 and CUDA 12.6. 
 Other environments might require different tweaks in installation of Flash Attention or vLLM. 
 
 
@@ -26,8 +26,8 @@ which is then passed to the trainer defined in OpenRLHF.
 
 For an illustrative example, we provide scripts to run on a slurm cluster:
 
-1. 1.5B with 4 H200 GPUs on 1 node. `run_rloo_1.5B.sh`
-2. 7B with 8 H200 GPUs on 2 nodes. `run_rloo_7B.sh`
+1. 1.5B with 4 GH200 GPUs on 1 node. `run_rloo_1.5B.sh`
+2. 7B with 8 GH200 GPUs on 2 nodes. `run_rloo_7B.sh`
 
 To train the `deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B` model, set `WANDB_KEY` and `ALPHA` in run_rloo_1.5B.sh and run the following command:
 
