@@ -1,6 +1,6 @@
 # Training Large Language Models to Reason Efficiently
 
-This is the codebase for our paper ["Training Large Language Models to Reason Efficiently"]().
+This is the codebase for our paper ["Training Large Language Models to Reason Efficiently"](https://arxiv.org/abs/2502.04463).
 The codebase has been tested on GH200 GPUs with Python 3.10.15 and CUDA 12.6. 
 Other environments might require different tweaks in installation of Flash Attention or vLLM. 
 
@@ -61,5 +61,13 @@ python evaluate_model.py \
 If you find this code repository useful, please cite us!
 
 ```
-Coming soon!
+@misc{arora2025traininglanguagemodelsreason,
+    title={Training Language Models to Reason Efficiently}, 
+    author={Daman Arora and Andrea Zanette},
+    year={2025},
+    eprint={2502.04463},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG},
+    url={https://arxiv.org/abs/2502.04463}, 
+}
 ```
