@@ -65,7 +65,7 @@ done
 MODEL_SCALE='7B'
 REWARD_TYPE='sigmoid'
 ALPHA=0.1
-WANDB_KEY="ce2bdc5650893d73a095f70d407ffc24c4d24f32"
+WANDB_KEY=""
 CHECK_EOS='--check_eos'
 SCHEDULER_TYPE='warmup_with_constant_lr' # can be cosine otherwise
 
