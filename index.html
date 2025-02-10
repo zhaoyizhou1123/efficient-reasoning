@@ -128,7 +128,7 @@
           </h2>
           <div class="content has-text-justified">
             <p>
-Training large language models with reinforcement learning to perform advanced reasoning has significantly enhanced their problem-solving abilities. 
+Training large language models to perform advanced reasoning with reinforcement learning has significantly advanced their problem-solving abilities. 
 However, their reliance on long chains-of-thoughts commands a high inference cost, posing challenges for efficient deployment. 
 To address this, we propose to train models to use the least possible amount of tokens to reach the correct solution.
             </p>
@@ -157,6 +157,14 @@ To address this, we propose to train models to use the least possible amount of 
             <p style="text-align: justify;">
 
             </p>
+            <p style="text-align: justify;">
+              We evaluate our post-training procedure on three common benchmarks, ordered by increasing level of difficulty:
+            </p>
+            <ul style="list-style-type: disc; padding-left: 1rem; text-align: justify;">
+              <li><strong>GSM8K</strong>, a dataset containing grade-school-level math problems;</li>
+              <li><strong>MATH500</strong>, a standard benchmark with problems harder than those in GSM8K;</li>
+              <li><strong>AIME2024</strong>, a competition-level dataset of challenging mathematical problems.</li>
+            </ul>
             <div class="figure">
               <img src="static/images/result.png"
                    alt="Speculative Rejection System"
@@ -175,14 +183,6 @@ To address this, we propose to train models to use the least possible amount of 
               solutions, while for more demanding ones (e.g., those in AIME2024), they invest additional
               computational effort to perform advanced reasoning.
             </p>
-            <p style="text-align: justify;">
-              We evaluate our post-training procedure on three common benchmarks, ordered by increasing level of difficulty:
-            </p>
-            <ul style="list-style-type: disc; padding-left: 1rem; text-align: justify;">
-              <li><strong>GSM8K</strong>, a dataset containing grade-school-level math problems;</li>
-              <li><strong>MATH500</strong>, a standard benchmark with problems harder than those in GSM8K;</li>
-              <li><strong>AIME2024</strong>, a competition-level dataset of challenging mathematical problems.</li>
-            </ul>
           </div>
 
           <!-- Extra margin above the Training Procedure heading -->
@@ -199,7 +199,7 @@ To address this, we propose to train models to use the least possible amount of 
           <div id="main-content">
             <div class="container">
               <p>
-We use reinforcement learning to train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The model is then updated using policy gradients.
+We use reinforcement learning to train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
               </p>
               <div class="figure" style="margin-top: 2rem;">
                 <img src="static/images/method.pdf"
