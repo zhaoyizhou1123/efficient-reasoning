@@ -229,7 +229,7 @@ To address this, we propose to post-train models to use the least possible amoun
                      alt="Training Method Overview"
                      style="width: 75%; display: block; margin: auto;" />    
                 <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem;">
-                  <strong>Figure 4:</strong> Reward function used for training. Incorrect responses receive a reward of 0, while correct responses are assigned higher rewards if they are shorter compared to other correct responses. The mean and variance are computed across all correct responses for a given prompt. \( \mathbb I_{correct}(x,y) \) indicates that the response \( y \) is correct with respect to prompt \( x \).
+                  <strong>Figure 4:</strong> Reward function used for training. Incorrect responses receive a reward of 0, while correct responses are assigned higher rewards if they are shorter compared to other correct responses. To compute the self-normalized length penalty of a response \( y \) with respect to a prompt \( x \), the mean \( \texttt{MEAN}(x) \) and variance \( \texttt{VAR}(x) \) of correct response lengths are calculated for each prompt \( x \). Here \( \mathbb I_{correct}(x,y) \) indicates that the response is correct.
                 </p>
               </div>
             </div>
