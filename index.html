@@ -138,7 +138,8 @@
             <p>
 Training large language models to perform advanced reasoning with reinforcement learning has significantly advanced their problem-solving abilities. 
 However, their reliance on long chain-of-thoughts commands a high inference cost, posing challenges for efficient deployment. 
-To address this, we propose to post-train models to use the least possible amount of tokens to reach the correct solution.
+<!-- To address this, we propose to post-train models to use the least possible amount of tokens to reach the correct solution. -->
+To address this, we propose post-training reasoning models with reinforcement learning using an objective function that favors correct responses with concise chain-of-thoughts.
             </p>
 
           <div class="figure" style="text-align: center;">
@@ -209,7 +210,7 @@ To address this, we propose to post-train models to use the least possible amoun
 
           <!-- Extra margin above the Training Procedure heading -->
 <h2 class="title is-3" 
-    style="text-align: center; margin-top: 3rem; display: flex; align-items: center; justify-content: center;">
+    style="text-align: center; margin-top: 7rem; display: flex; align-items: center; justify-content: center;">
   <!-- Logo on the left -->
   <img src="static/images/train.png" 
        alt="Logo" 
@@ -221,7 +222,7 @@ To address this, we propose to post-train models to use the least possible amoun
           <div id="main-content">
             <div class="container">
               <div class="figure" style="margin-top: 2rem;">
-                <img src="static/images/method-1.png"
+                <img src="static/images/pipeline.drawio-5.png"
                      alt="Training Method Overview"
                      height="400" />
                 <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
