@@ -131,7 +131,7 @@
             <p>
 Training large language models to perform advanced reasoning with reinforcement learning has significantly advanced their problem-solving abilities. 
 However, their reliance on long chain-of-thoughts commands a high inference cost, posing challenges for efficient deployment. 
-To address this, we propose to train models to use the least possible amount of tokens to reach the correct solution.
+To address this, we propose to post-train models to use the least possible amount of tokens to reach the correct solution.
             </p>
 
           <div class="figure" style="text-align: center;">
@@ -183,9 +183,7 @@ To address this, we propose to train models to use the least possible amount of 
                    height="400" />
               
               <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
-                <strong>Figure 2:</strong> Detailed comparison of the number of tokens and accuracy achieved by different models to solve problems in the GSM8K, MATH500, and AIME2024 datasets. 
-                The reduction in tokens achieved for the same values of &alpha; are much higher for easier problems (such as GSM8K) and lower for harder problems (such as AIME2024).
-                This shows that our training procedure leads to models that can dynamically adapt the test-time compute based on the difficulty of the problem.
+                <strong>Figure 2:</strong> Detailed comparison of the number of tokens and accuracy achieved by different models to solve problems in the GSM8K, MATH500, and AIME2024 datasets.
               </p>
             </div>
             <p style="text-align: justify;">
