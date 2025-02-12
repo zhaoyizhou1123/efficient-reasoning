@@ -221,13 +221,13 @@ To address this, we propose to post-train models to use the least possible amoun
                   <strong>Figure 3:</strong> Overview of the training method.
                 </p>
               </div>
-              <p style="margin-bottom: 1rem ;">
+              <p style="margin-bottom: 3rem ;">
                 We use reinforcement learning to post-train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
               </p>
-              <div class="figure" style="margin-top: 2rem; display: block; width: 65%; text-align: center; margin: 0 auto;">
+              <div class="figure" style="margin-top: 4rem; display: block; width: 75%; text-align: center; margin: 0 auto;">
                 <img src="static/images/eqn.drawio-4-1.png"
                      alt="Training Method Overview"
-                     style="width: 75%; display: block; margin: auto;" />    
+                     style="width: 100%; display: block; margin: auto;" />    
                 <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem;">
                   <strong>Figure 4:</strong> Reward function used for training. Incorrect responses receive a reward of 0, while correct responses are assigned higher rewards if they are shorter compared to other correct responses. To compute the self-normalized length penalty of a response \( y \) with respect to a prompt \( x \), the mean \( \texttt{MEAN}(x) \) and variance \( \texttt{VAR}(x) \) of correct response lengths are calculated for each prompt \( x \). Here \( \mathbb I_{correct}(x,y) \) indicates that the response is correct.
                 </p>
