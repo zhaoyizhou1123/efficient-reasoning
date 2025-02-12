@@ -123,7 +123,8 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <!-- Extra margin above the Introduction heading -->
-          <h2 class="title is-3" style="text-align: center; margin-top: 3rem;">
+           
+          <h2 class="title is-3" style="text-align: center; margin-top: 1rem;">
             Introduction
           </h2>
           <div class="content has-text-justified">
@@ -132,6 +133,19 @@ Training large language models to perform advanced reasoning with reinforcement 
 However, their reliance on long chain-of-thoughts commands a high inference cost, posing challenges for efficient deployment. 
 To address this, we propose to train models to use the least possible amount of tokens to reach the correct solution.
             </p>
+
+          <div class="figure" style="text-align: center;">
+            <img src="static/images/normalized_averages copy.pdf"
+                 alt="Reasoning Efficiently System"
+                 style="margin: auto; display: block;"  />
+            <div style="display: block; width: 100%; text-align: center;">
+              <p style="font-size: 0.8em; margin-top: 0.5rem">
+                <strong>Figure 1:</strong> Results normalized across the GSM8K, MATH500, and AIME2024 datasets. 
+                Instruct refers to the Qwen2.5-Math-7B-Instruct model whereas Full Reasoning refers to DeepSeek-R1-Distill-Qwen-7B model.
+                The tokens and accuracy are normalized with respect to the Full Reasoning model. &alpha; = 0.1 and &alpha; = 0.2 are models trained by us which are comparable to the Full Reasoning model in terms of accuracy but use significantly lower number of tokens during inference time.
+              </p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -169,6 +183,12 @@ To address this, we propose to train models to use the least possible amount of 
               <img src="static/images/result.png"
                    alt="Reasoning Efficiently System"
                    height="400" />
+              
+              <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
+                <strong>Figure 2:</strong> Detailed comparison of the number of tokens and accuracy achieved by different models to solve problems in the GSM8K, MATH500, and AIME2024 datasets. 
+                As can be seen from the figure, the reduction in tokens achieved for the same values of &alpha; are much higher for easier problems (such as GSM8K) and lower for harder problems (such as AIME2024).
+                This shows that our training procedure adapts the response length based on the difficulty of the problem.
+              </p>
             </div>
             <p style="text-align: justify;">
               Our method can generate a <strong>family of reasoning models</strong>, governed by a
@@ -198,13 +218,25 @@ To address this, we propose to train models to use the least possible amount of 
 
           <div id="main-content">
             <div class="container">
-              <p>
-We use reinforcement learning to train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
-              </p>
               <div class="figure" style="margin-top: 2rem;">
                 <img src="static/images/method.pdf"
                      alt="Training Method Overview"
                      height="400" />
+                <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
+                  <strong>Figure 3:</strong> Training method overview. For each prompt in the dataset, the Language Model generates multiple responses which are then rewarded based on 
+                  correctness and response length. The model is then optimized using policy gradients.
+                </p>
+              </div>
+              <p>
+                We use reinforcement learning to train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
+              </p>
+              <div class="figure" style="margin-top: 2rem;">
+                <img src="static/images/eqn.drawio-4.pdf"
+                     alt="Training Method Overview"
+                     style="width: 75%; display: block; margin: auto;" />    
+                <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem;">
+                  <strong>Figure 4:</strong> Reward function used for training. All incorrect responses get a reward of 0 whereas correct sequences are rewarded higher if they are shorter in length compared to other correct responses. It is to be noted that the mean and variance are computed over all the correct responses for that prompt.
+                </p>
               </div>
             </div>
           </div>
