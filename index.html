@@ -140,9 +140,7 @@ To address this, we propose to train models to use the least possible amount of 
                  style="margin: auto; display: block;"  />
             <div style="display: block; width: 100%; text-align: center;">
               <p style="font-size: 0.8em; margin-top: 0.5rem">
-                <strong>Figure 1:</strong> Results normalized across the GSM8K, MATH500, and AIME2024 datasets. 
-                Instruct refers to the Qwen2.5-Math-7B-Instruct model whereas Full Reasoning refers to DeepSeek-R1-Distill-Qwen-7B model.
-                The tokens and accuracy are normalized with respect to the Full Reasoning model. &alpha; = 0.1 and &alpha; = 0.2 are models trained by us which are comparable to the Full Reasoning model in terms of accuracy but use significantly lower number of tokens during inference time.
+                <strong>Figure 1:</strong> Our models achieve comparable accuracy to the Full Reasoning model (DeepSeek-R1-Distill-Qwen-7B) while significantly reducing token consumption during inference. Results are normalized across the GSM8K, MATH500, and AIME2024 datasets; Instruct refers to the Qwen2.5-Math-7B-Instruct model. Token usage and accuracy are normalized relative to the Full Reasoning model. 
               </p>
             </div>
           </div>
@@ -186,13 +184,13 @@ To address this, we propose to train models to use the least possible amount of 
               
               <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
                 <strong>Figure 2:</strong> Detailed comparison of the number of tokens and accuracy achieved by different models to solve problems in the GSM8K, MATH500, and AIME2024 datasets. 
-                As can be seen from the figure, the reduction in tokens achieved for the same values of &alpha; are much higher for easier problems (such as GSM8K) and lower for harder problems (such as AIME2024).
-                This shows that our training procedure adapts the response length based on the difficulty of the problem.
+                The reduction in tokens achieved for the same values of &alpha; are much higher for easier problems (such as GSM8K) and lower for harder problems (such as AIME2024).
+                This shows that our training procedure leads to models that can dynamically adapt the test-time compute based on the difficulty of the problem.
               </p>
             </div>
             <p style="text-align: justify;">
-              Our method can generate a <strong>family of reasoning models</strong>, governed by a
-              coefficient &alpha;. Starting with DeepSeek-R1-Distill-Qwen-7B (labeled "original" in the
+              Our post-training procedure generates a <strong>family of reasoning models</strong>, governed by a
+              coefficient &alpha;. Starting from a reasoning model such as DeepSeek-R1-Distill-Qwen-7B (labeled "Full Reasoning" in the
               figure), increasing &alpha; boosts generation efficiency—yielding shorter chain-of-thoughts—
               while largely preserving response accuracy.
             </p>
@@ -213,7 +211,7 @@ To address this, we propose to train models to use the least possible amount of 
        alt="Logo" 
        style="height: 40px; margin-right: 10px;" />
   <!-- Heading text -->
-  Training Procedure
+  Post-Training Procedure
 </h2>
 
           <div id="main-content">
@@ -223,19 +221,18 @@ To address this, we propose to train models to use the least possible amount of 
                      alt="Training Method Overview"
                      height="400" />
                 <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
-                  <strong>Figure 3:</strong> Training method overview. For each prompt in the dataset, the Language Model generates multiple responses which are then rewarded based on 
-                  correctness and response length. The model is then optimized using policy gradients.
+                  <strong>Figure 3:</strong> Overview of the training method.
                 </p>
               </div>
               <p>
-                We use reinforcement learning to train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
+                We use reinforcement learning to post-train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
               </p>
               <div class="figure" style="margin-top: 2rem;">
                 <img src="static/images/eqn.drawio-4.pdf"
                      alt="Training Method Overview"
                      style="width: 75%; display: block; margin: auto;" />    
                 <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem;">
-                  <strong>Figure 4:</strong> Reward function used for training. All incorrect responses get a reward of 0 whereas correct sequences are rewarded higher if they are shorter in length compared to other correct responses. It is to be noted that the mean and variance are computed over all the correct responses for that prompt.
+                  <strong>Figure 4:</strong> Reward function used for training. Incorrect responses receive a reward of 0, while correct responses are assigned higher rewards if they are shorter compared to other correct responses. The mean and variance are computed across all correct responses for a given prompt. \( \mathbb I_{correct}(x,y) \) indicates that the response \( y \) is correct with respect to prompt \( x \).
                 </p>
               </div>
             </div>
