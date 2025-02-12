@@ -138,7 +138,7 @@ To address this, we propose to post-train models to use the least possible amoun
             <img src="static/images/normalized_averages copy.pdf"
                  alt="Reasoning Efficiently System"
                  style="margin: auto; display: block;"  />
-            <div style="display: block; width: 100%; text-align: center;">
+            <div style="display: block; width: 65%; text-align: center; margin: 0 auto;">
               <p style="font-size: 0.8em; margin-top: 0.5rem">
                 <strong>Figure 1:</strong> Our models achieve comparable accuracy to the Full Reasoning model (DeepSeek-R1-Distill-Qwen-7B) while significantly reducing token consumption during inference. Results are normalized across the GSM8K, MATH500, and AIME2024 datasets; Instruct refers to the Qwen2.5-Math-7B-Instruct model. Token usage and accuracy are normalized relative to the Full Reasoning model. 
               </p>
@@ -182,11 +182,11 @@ To address this, we propose to post-train models to use the least possible amoun
                    alt="Reasoning Efficiently System"
                    height="400" />
               
-              <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem;">
+              <p style="text-align: center; font-size: 0.8em; margin-top: 0.5rem; margin-bottom: 1rem; display: block; width: 68%; text-align: center; margin: 0 auto;">
                 <strong>Figure 2:</strong> Detailed comparison of the number of tokens and accuracy achieved by different models to solve problems in the GSM8K, MATH500, and AIME2024 datasets.
               </p>
             </div>
-            <p style="text-align: justify;">
+            <p style="text-align: justify; margin-top: 1rem;">
               Our post-training procedure generates a <strong>family of reasoning models</strong>, governed by a
               coefficient &alpha;. Starting from a reasoning model such as DeepSeek-R1-Distill-Qwen-7B (labeled "Full Reasoning" in the
               figure), increasing &alpha; boosts generation efficiency—yielding shorter chain-of-thoughts—while largely preserving response accuracy.
@@ -221,10 +221,10 @@ To address this, we propose to post-train models to use the least possible amoun
                   <strong>Figure 3:</strong> Overview of the training method.
                 </p>
               </div>
-              <p>
+              <p style="margin-bottom: 1rem ;">
                 We use reinforcement learning to post-train models for both accuracy and token efficiency. For each prompt, multiple solutions are sampled and rewarded based on correctness and response length. The shortest correct answers receive the highest rewards, followed by longer correct ones, while incorrect responses receive the lowest rewards. The models are then updated using policy gradients.
               </p>
-              <div class="figure" style="margin-top: 2rem;">
+              <div class="figure" style="margin-top: 2rem; display: block; width: 65%; text-align: center; margin: 0 auto;">
                 <img src="static/images/eqn.drawio-4.pdf"
                      alt="Training Method Overview"
                      style="width: 75%; display: block; margin: auto;" />    
