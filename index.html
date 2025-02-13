@@ -143,7 +143,8 @@ To address this, we propose post-training reasoning models with reinforcement le
             </p>
 
           <div class="figure" style="text-align: center;">
-            <img src="static/images/normalized_averages copy-1.png"
+            <!-- <img src="static/images/normalized_averages copy-1.png" -->
+            <img src="static/images/output.png" 
                  alt="Reasoning Efficiently System"
                  style="margin: auto; display: block;"  />
             <div style="display: block; width: 65%; text-align: center; margin: 0 auto;">
@@ -195,9 +196,12 @@ To address this, we propose post-training reasoning models with reinforcement le
               </p>
             </div>
             <p style="text-align: justify; margin-top: 1rem;">
-              Our post-training procedure generates a <strong>family of reasoning models</strong>, governed by a
-              coefficient &alpha;. Starting from a reasoning model such as DeepSeek-R1-Distill-Qwen-7B (labeled "Full Reasoning" in the
-              figure), increasing &alpha; boosts generation efficiency—yielding shorter chain-of-thoughts—while largely preserving response accuracy.
+              <!-- Our post-training procedure generates a <strong>family of reasoning models</strong>, governed by a -->
+              <!-- coefficient &alpha;. Starting from a reasoning model such as DeepSeek-R1-Distill-Qwen-7B (labeled "Full Reasoning" in the -->
+              <!-- figure), increasing &alpha; boosts generation efficiency—yielding shorter chain-of-thoughts—while largely preserving response accuracy. -->
+              Our post-training procedure refines a reasoning model—such as DeepSeek-R1-Distill-Qwen-7B, labeled "Full Reasoning" in the figure—into 
+              a more <strong>token-efficient</strong> version. By selecting a scalar coefficient α at the beginning of post-training, users can balance accuracy 
+              and token efficiency. A higher α enhances generation efficiency by shortening chain-of-thoughts while largely maintaining response accuracy.
             </p>
             <p style="text-align: justify;">
               Models trained in this way <strong>know when to stop thinking</strong>:
