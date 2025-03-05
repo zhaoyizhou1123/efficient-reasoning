@@ -177,3 +177,5 @@ results/
 logs/
 wandb/
 datasets/compression_dataset/
+debug/
+debug_*
