@@ -159,6 +159,9 @@ def evaluate_model(model_name):
 
     return {'test': test_scores, 'time_taken': time_taken}
 
+os.makedirs("results", exist_ok=True)
+os.makedirs("outputs", exist_ok=True)
+
 print("Found model_path:", model_path)
 print("This is not a checkpoint, will evaluate directly...")
 scores = evaluate_model(model_path)
