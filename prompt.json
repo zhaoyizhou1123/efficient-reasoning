@@ -1,4 +1,8 @@
 [
     {"name": "verifier", "prompt_template": "You are going to verify a student's answer. You will be given a math question, as well as the student's response. The response contains the reasoning process as well as the final answer. First extract the student's final answer, then read through the student's response to see if there are mistakes. Finally, check the student's answer. Your final answer is True if the student's answer is true, and False otherwise. Put your final answer (True or False) within \\boxed{{}}. \n\nQuestion: {question}\n\nResponse: {response}"},
-    {"name": "verifier2", "prompt_template": "You will be given the student's response. Read through the student's response step by step to see if there are mistakes. Answer True if there are no mistakes, and False otherwise. Put your final answer (True or False) within \\boxed{{}}. \n\nResponse: {response}"}
+    {"name": "verifier2", "prompt_template": "You will be given the student's response. Read through the student's response step by step to see if there are mistakes. Answer True if there are no mistakes, and False otherwise. Put your final answer (True or False) within \\boxed{{}}. \n\nResponse: {response}"},
+    {"name": "generator", "prompt_template": "Please reason step by step, and put your final answer within \\boxed{{}}. Question: {question}"},
+    {"name": "generator2", "prompt_template": "Question: {question}\nLet's think step by step"},
+    {"name": "generator3", "prompt_template": "{question}"},
+    {"name": "generator4", "prompt_template": "Question:\n{question}\n\nSolution:\n"}
 ]

@@ -7,7 +7,8 @@ DATASET_KEYS = {
     'datasets/converted_aime_dataset': {'question': 'problem', 'answer': 'solution'},
     'di-zhang-fdu/MATH500': {'question': 'problem', 'answer': 'solution'},
     'datasets/compression_dataset': {'question': 'problem', 'answer': 'solution'},
-    'verify': {'question': 'question', 'answer': 'answer', 'responses': 'responses', 'correctness': 'accuracy'}
+    'verify': {'question': 'question', 'answer': 'answer', 'responses': 'responses', 'correctness': 'accuracy'},
+    'MATH': {'question': 'problem', 'answer': 'solution'},
 }
 
 RESPONSE_EXTRACTOR = {
@@ -16,7 +17,8 @@ RESPONSE_EXTRACTOR = {
     'di-zhang-fdu/MATH500': lambda x: extract_answer(x, data_name='math'),
     'datasets/compression_dataset': lambda x: extract_answer(x, data_name='math'),
     'datasets/converted_aime_dataset': lambda x: extract_answer(x, data_name='math'),
-    'verify': lambda x: extract_answer(x, data_name='math')
+    'verify': lambda x: extract_answer(x, data_name='math'),
+    'MATH': lambda x: extract_answer(x, data_name='math'),
 }
 
 RESPONSE_COMPARATOR = {
@@ -25,5 +27,6 @@ RESPONSE_COMPARATOR = {
     'di-zhang-fdu/MATH500': lambda x, y: math_equal(x, y, timeout=True),
     'datasets/compression_dataset': lambda x, y: math_equal(x, y, timeout=True),
     'datasets/converted_aime_dataset': lambda x, y: math_equal(x, y, timeout=True),
-    'verify': lambda x, y: math_equal(x, y, timeout=True)
+    'verify': lambda x, y: math_equal(x, y, timeout=True),
+    'MATH': lambda x, y: math_equal(x, y, timeout=True),
 }

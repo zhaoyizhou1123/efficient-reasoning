@@ -15,6 +15,10 @@ parser.add_argument('--model_path', type=str, default='')
 parser.add_argument('--dataset', type=str)
 parser.add_argument('--scale', type=str, default='1.5B')
 parser.add_argument('--tok_limit', type=int, default=32768)
+parser.add_argument('--temperature', type=float, default=None)
+parser.add_argument('--test_n', type=int, default=None)
+parser.add_argument('--post_truncate', action='store_true')
+parser.add_argument('--save_freq', type=int, default=None)
 args = parser.parse_args()
 os.environ['TOKENIZERS_PARALLELISM'] = "false"
 
@@ -49,16 +53,47 @@ elif dataset_name == 'openai/gsm8k':
     MAX_TOKENS = tok_limit
     TEST_TEMPERATURE = 0.6
     MAX_TEST_SAMPLES = 1319
+elif dataset_name == 'MATH_train':
+    dataset = load_dataset("zzy1123/MATH_train_test_split", split="train")
+    TEST_N = 2
+    MAX_TOKENS = tok_limit
+    TEST_TEMPERATURE = 0.6
+    MAX_TEST_SAMPLES = 500
+elif dataset_name == 'MATH_test':
+    dataset = load_dataset("zzy1123/MATH_train_test_split", split="test")
+    TEST_N = 2
+    MAX_TOKENS = tok_limit
+    TEST_TEMPERATURE = 0.6
+    MAX_TEST_SAMPLES = 500
+else:
+    raise NotImplementedError
+
+if args.temperature is not None:
+    TEST_TEMPERATURE = float(args.temperature)
+if args.test_n is not None:
+    TEST_N = int(args.test_n)
+
+def post_truncate(response):
+    response = response.split("<|endoftext|>")[0]
+    # response = response.split("\n\n\n")[0]
+    # response = response.split("\n\n")[0]
+    response = response.split("Question:")[0]
+    response = response.split("Problem:")[0]
+    return response
 
 
 def get_scores(ds, outputs, save_file_name=None):
     predictions, golds = [], []
     results = []
-    for input, output in zip(ds, outputs):
+    for id, input, output in enumerate(zip(ds, outputs)):
         gold = RESPONSE_EXTRACTOR[dataset_name](input[ANSWER_KEY])
+        if args.post_truncate:
+            truncated_responses = [post_truncate(resp.text) for resp in output.outputs]
+        else:
+            truncated_responses = [resp.text for resp in output.outputs]
         prediction = [
-            RESPONSE_EXTRACTOR[dataset_name](resp.text)
-            for resp in output.outputs
+            RESPONSE_EXTRACTOR[dataset_short_name](truncated_resp)
+            for truncated_resp in truncated_responses
         ]
         predictions.append(prediction)
         golds.append(gold)
@@ -130,7 +165,7 @@ def get_scores(ds, outputs, save_file_name=None):
 
 def evaluate_model(model_name):
     test_prompts = []
-    model = LLM(model_name, tokenizer=f'deepseek-ai/DeepSeek-R1-Distill-Qwen-{scale}', gpu_memory_utilization=0.9, tensor_parallel_size=1)    
+    model = LLM(model_name, tokenizer=model_path, gpu_memory_utilization=0.9, tensor_parallel_size=1)    
     test_ds = dataset['test'].shuffle(seed=0).select(range(min(MAX_TEST_SAMPLES, len(dataset['test']))))
     
     for x in test_ds:
