@@ -9,7 +9,7 @@
 
 local_dir=.local_daman
 apptainer exec --nv -B $HOME/$local_dir:$HOME/.local --env-file  $HOME/containers/env.txt $HOME/containers/pytorch_23.11-py3.sif \
-python get_responses.py \
+python -u get_responses.py \
     --model_path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B \
     --dataset=openai/gsm8k \
     --scale=1.5B \

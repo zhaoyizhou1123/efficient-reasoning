@@ -180,3 +180,4 @@ datasets/compression_dataset/
 debug/
 debug_*
 slurm/
+checkpoints/

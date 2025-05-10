@@ -13,8 +13,9 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_path', type=str, default='')
+parser.add_argument('--base_model_path', type=str, default='')
 parser.add_argument('--dataset', type=str)
-parser.add_argument('--scale', type=str, default='1.5B')
+# parser.add_argument('--scale', type=str, default='1.5B')
 parser.add_argument('--tok_limit', type=int, default=32768)
 parser.add_argument('--split', type=str, default='test', help="train or test")
 parser.add_argument('--temperature', type=float, default=None)
@@ -28,12 +29,12 @@ os.environ['TOKENIZERS_PARALLELISM'] = "false"
 
 dataset_name = args.dataset
 model_path = args.model_path
-scale = args.scale
+# scale = args.scale
 tok_limit = args.tok_limit
 dataset_name = args.dataset
 results = {}
 
-print("Dataset:", dataset_name, "\nScale:", scale)
+# print("Dataset:", dataset_name, "\nScale:", scale)
 
 QUESTION_KEY = DATASET_KEYS[dataset_name]["question"]
 ANSWER_KEY = DATASET_KEYS[dataset_name]["answer"]
@@ -175,11 +176,11 @@ def get_scores(results):
     }
 
 
-def evaluate_model(model_name, split):
+def evaluate_model(model_name, base_model_name, split):
     test_prompts = []
-    model = LLM(model_name, tokenizer=model_path, gpu_memory_utilization=0.9, tensor_parallel_size=1)   
+    model = LLM(model_name, tokenizer=base_model_name, gpu_memory_utilization=0.9, tensor_parallel_size=1)   
     test_ds = dataset[split]
-    test_ds = test_ds.select(range(5))
+    # test_ds = test_ds.select(range(50))
     # test_ds = dataset[split].shuffle(seed=0)
     
     for cnt, x in enumerate(test_ds):
@@ -190,7 +191,6 @@ def evaluate_model(model_name, split):
             }]
             prompt_tokens = model.llm_engine.tokenizer.tokenizer.apply_chat_template(prompt, add_generation_prompt=True)
         else:
-            # prompt=f"Please reason step by step, and put your final answer within \\boxed{{}}. Question: {x[QUESTION_KEY]}"
             prompt=f"{x[QUESTION_KEY]} Let's think step by step and output the final answer after \'####\'."
             # prompt=f"Question: {x[QUESTION_KEY]}\nLet's think step by step"
             # prompt=x[QUESTION_KEY]
@@ -236,7 +236,7 @@ else:
 
 print("Found model_path:", model_path)
 print("This is not a checkpoint, will evaluate directly...")
-scores = evaluate_model(model_path, args.split)
+scores = evaluate_model(model_path, args.base_model_path, args.split)
 results[model_path] = scores
 
 with open(f"results/{dataset_name.replace('/', '_')}_{args.split}_results_{model_path.replace('/', '_')}_{args.prompt_type}_t{args.temperature}_{tok_limit}.json", 'w') as f:
